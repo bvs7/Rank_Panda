@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.bigredbands.mb.models.MarchingConstants.PART;
@@ -223,6 +224,38 @@ public class Move {
 	public void updatePositions(String rankName, RankPosition newStartPos) {
 		startPositions.put(rankName, newStartPos);
 		endPositions.put(rankName, getPositionFromCommands(rankName));
+	}
+	
+	/**
+	 * Check that all ranks have the correct number of counts in this move
+	 * @return A string that lists which ranks have too few counts
+	 */
+	public String checkMoveCounts(){
+		String result = "";
+		boolean failFlag = false;
+		
+		Iterator it = commands.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair = (Map.Entry)it.next();
+			String rank = (String) pair.getKey();
+			ArrayList<CommandPair> commandPairList = (ArrayList<CommandPair>) pair.getValue();
+			
+			int sum = 0;
+			for(CommandPair cp : commandPairList){
+				sum += cp.getCounts();
+			}
+			
+			if(!moveCounts.equals(sum)){
+				failFlag = true;
+				result += rank + " has only " + Integer.toString(sum) + " counts\n";
+			}
+		}
+		
+		if(!failFlag){
+			result = "All ranks have correct number of counts for move";
+		}
+		
+		return result;
 	}
 	
 	public HashMap<String, RankPosition> deepCopyPositions(HashMap<String, RankPosition> existingPositions) {

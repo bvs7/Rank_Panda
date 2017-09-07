@@ -340,6 +340,10 @@ public class MainController implements ControllerInterface, SynchronizedControll
 		
 	}
 	
+	public String checkMoveCounts(){
+		return drillInfo.getMoves().get(currentMove).checkMoveCounts();
+	}
+	
 	private ArrayList<CommandPair> getSharedCommands(HashSet<String> rankNames, HashMap<String,ArrayList<CommandPair>>commands) {
 		if(rankNames.size()==0) {
 			return new ArrayList<CommandPair>();

@@ -289,6 +289,7 @@ public interface ControllerInterface {
 
 	public void updateInitialPosition(String rankName, RankPosition newPos);
 
+	public String checkMoveCounts();
+	
 	void deleteMove(int moveNum);
-
 }

@@ -311,6 +311,7 @@ public class ProjectView {
 		JMenuItem addRankMenuItem = new JMenuItem("Add Rank");
 		JMenuItem songConstantsMenuItem = new JMenuItem("Edit Song Constants");
 		JMenuItem editMoveComments = new JMenuItem("Edit Move Comments");
+		JMenuItem checkMoveCounts = new JMenuItem("Check Move Counts");
 
 		// Sets the tooltips for the file menu
 		openMenuItem.setToolTipText("Open an existing project");
@@ -326,6 +327,7 @@ public class ProjectView {
 		addRankMenuItem.setToolTipText("Add a new rank to this project");
 		songConstantsMenuItem.setToolTipText("Modify measures' tempos and counts");
 		editMoveComments.setToolTipText("Edit the comments section in the PDF for this move.");
+		checkMoveCounts.setToolTipText("Check if any rank's drill does not add up to move counts.");
 
 		// Creates the listeners for the buttons on the menus
 		openMenuItem.addActionListener(new Open());
@@ -338,6 +340,7 @@ public class ProjectView {
 		addRankMenuItem.addActionListener(new AddRank());
 		songConstantsMenuItem.addActionListener(new SongConstants());
 		editMoveComments.addActionListener(new EditMoveComments());
+		checkMoveCounts.addActionListener(new CheckMoveCounts());
 
 		// Add all these items to their respective menus and add the menus to the menu bar
 		fileMenu.add(openMenuItem);
@@ -350,6 +353,7 @@ public class ProjectView {
 		editMenu.add(addRankMenuItem);
 		editMenu.add(songConstantsMenuItem);
 		editMenu.add(editMoveComments);
+		editMenu.add(checkMoveCounts);
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 
@@ -1575,6 +1579,46 @@ public class ProjectView {
 			
 			moveCommentDialog.add(moveCommentPanel);
 			moveCommentDialog.setVisible(true);
+		}
+	}
+	
+	/**
+	 * Checks to make sure all ranks have the correct number of counts for this move
+	 */
+	class CheckMoveCounts implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e){
+			String result = controller.checkMoveCounts();
+			final JDialog checkCountsDialog = new JDialog(window, "Move Count Check");
+			checkCountsDialog.setSize(600,200); //TODO make these constants
+			checkCountsDialog.setAlwaysOnTop(true);
+			checkCountsDialog.setLocationRelativeTo(window);
+			checkCountsDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+			
+			JPanel checkCountsPanel = new JPanel();
+			checkCountsPanel.setLayout(new BoxLayout(checkCountsPanel, BoxLayout.Y_AXIS));
+			
+			JLabel checkCountsLabel = new JLabel();
+			checkCountsLabel.setText(result);
+			checkCountsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+			
+			JButton closeButton = new JButton("Close");
+			closeButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					checkCountsDialog.dispose();
+				}
+			});
+			
+			buttonPanel.add(closeButton);
+			
+			checkCountsPanel.add(checkCountsLabel);
+			checkCountsPanel.add(buttonPanel);
+			
+			checkCountsDialog.add(checkCountsPanel);
+			checkCountsDialog.setVisible(true);
 		}
 	}
 	
