@@ -72,8 +72,8 @@ public class CommandListView {
 			// and allowing the users to type there, possibly populating it with the contents of 
 			// the old string
 			final JDialog renameDialog = new JDialog(window, "Rename Command");
-			renameDialog.setSize(300,135);
-			renameDialog.setMinimumSize(new Dimension(300,135));
+			//renameDialog.setSize(300,135);
+			//renameDialog.setMinimumSize(new Dimension(300,135));
 			renameDialog.setAlwaysOnTop(true);
 			renameDialog.setLocationRelativeTo(window);
 			renameDialog.setModalityType(ModalityType.APPLICATION_MODAL);
@@ -119,6 +119,7 @@ public class CommandListView {
 			renamePanel.add(buttonPanel);
 			
 			renameDialog.add(renamePanel);
+			renameDialog.pack();
 			renameDialog.setVisible(true);
 		}
 	}
@@ -166,8 +167,8 @@ public class CommandListView {
 		
 		if (selectedIndices.length > 0) {
 			final JDialog splitDialog = new JDialog(window, "Split Command");
-			splitDialog.setMinimumSize(new Dimension(350,180));
-			splitDialog.setSize(350,180);
+			//splitDialog.setMinimumSize(new Dimension(350,180));
+			//splitDialog.setSize(350,180);
 			splitDialog.setAlwaysOnTop(true);
 			splitDialog.setLocationRelativeTo(window);
 			splitDialog.setModalityType(ModalityType.APPLICATION_MODAL);
@@ -250,6 +251,7 @@ public class CommandListView {
 			splitPanel.add(warningLabel);
 			
 			splitDialog.add(splitPanel);
+			splitDialog.pack();
 			splitDialog.setVisible(true);
 		}
 	}

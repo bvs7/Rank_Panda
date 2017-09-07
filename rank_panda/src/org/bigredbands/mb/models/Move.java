@@ -231,7 +231,7 @@ public class Move {
 	 * @return A string that lists which ranks have too few counts
 	 */
 	public String checkMoveCounts(){
-		String result = "";
+		String result = "<html>";
 		boolean failFlag = false;
 		
 		Iterator it = commands.entrySet().iterator();
@@ -247,12 +247,14 @@ public class Move {
 			
 			if(!moveCounts.equals(sum)){
 				failFlag = true;
-				result += rank + " has only " + Integer.toString(sum) + " counts\n";
+				result += rank + " has only " + Integer.toString(sum) + " counts<br>";
 			}
 		}
 		
 		if(!failFlag){
 			result = "All ranks have correct number of counts for move";
+		}else{
+			result += "</html>";
 		}
 		
 		return result;

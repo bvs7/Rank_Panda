@@ -1536,7 +1536,7 @@ public class ProjectView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			final JDialog moveCommentDialog = new JDialog(window, "Move Comment");
-			moveCommentDialog.setSize(400,100);
+			//moveCommentDialog.setSize(400,100);
 			moveCommentDialog.setAlwaysOnTop(true);
 			moveCommentDialog.setLocationRelativeTo(window);
 			moveCommentDialog.setModalityType(ModalityType.APPLICATION_MODAL);
@@ -1578,6 +1578,7 @@ public class ProjectView {
 			moveCommentPanel.add(buttonPanel);
 			
 			moveCommentDialog.add(moveCommentPanel);
+			moveCommentDialog.pack();
 			moveCommentDialog.setVisible(true);
 		}
 	}
@@ -1590,7 +1591,6 @@ public class ProjectView {
 		public void actionPerformed(ActionEvent e){
 			String result = controller.checkMoveCounts();
 			final JDialog checkCountsDialog = new JDialog(window, "Move Count Check");
-			checkCountsDialog.setSize(600,200); //TODO make these constants
 			checkCountsDialog.setAlwaysOnTop(true);
 			checkCountsDialog.setLocationRelativeTo(window);
 			checkCountsDialog.setModalityType(ModalityType.APPLICATION_MODAL);
@@ -1618,6 +1618,7 @@ public class ProjectView {
 			checkCountsPanel.add(buttonPanel);
 			
 			checkCountsDialog.add(checkCountsPanel);
+			checkCountsDialog.pack();
 			checkCountsDialog.setVisible(true);
 		}
 	}
