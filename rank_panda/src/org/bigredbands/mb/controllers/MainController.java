@@ -740,6 +740,7 @@ public class MainController implements ControllerInterface, SynchronizedControll
 	public void assignCommand(String rankName, CommandPair commandPair){
 		String errorMessage = drillInfo.getMoves().get(currentMove).addCommand(rankName, commandPair);
 		if (errorMessage.isEmpty()) {
+			
 			updatePositions(rankName);
 		}
 		else {

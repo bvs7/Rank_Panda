@@ -150,6 +150,15 @@ public class ProjectView {
 			}		
 		});
 		
+		// Listener for Enter press from count entry
+		countText.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainView.assignCommand(mainView.getSelectedRanks(), 
+						countText.getText(), commandFlag, DTPDest);
+			}
+		});
+		
+		
 		cancelCommand.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cancelPreviousCommand(commandFlag);
@@ -1384,6 +1393,7 @@ public class ProjectView {
 		confirmCommand.setVisible(true);
 		cancelCommand.setVisible(true);
 		countText.requestFocus();
+		countText.selectAll();
 	}
 	
 	/**
@@ -1642,7 +1652,7 @@ public class ProjectView {
 			if(e.getKeyCode()==KeyEvent.VK_SHIFT){
 				shiftPress = true;
 			}
-			if (ctrlPress && e.getKeyCode()==KeyEvent.VK_S) {
+			else if (ctrlPress && e.getKeyCode()==KeyEvent.VK_S) {
 				onSave(false);
 			} else if (ctrlPress && e.getKeyCode() == KeyEvent.VK_A) {
 				// select all ranks
@@ -1650,6 +1660,72 @@ public class ProjectView {
 				mainView.deselectAll();
 				for (String name : rankPositions.keySet()) {
 					mainView.addSelectedRank(name, false);
+				}
+			}else if(ctrlPress && e.getKeyCode() == KeyEvent.VK_M){
+				// Shortcut for MT
+				if (!(commandFlag == CommandPair.MT)){
+					cancelPreviousCommand(commandFlag);
+					if (commandFlag == -1) {
+						displayCommandInfo();
+					}
+					
+					rankInfoToolbar.setVisible(false);
+					commandFlag = CommandPair.MT;
+				}
+			}else if(ctrlPress && e.getKeyCode() == KeyEvent.VK_H){
+				// Shortcut for Halt
+				if (!(commandFlag == CommandPair.HALT)){
+					cancelPreviousCommand(commandFlag);
+					if (commandFlag == -1) {
+						displayCommandInfo();
+					}
+					
+					rankInfoToolbar.setVisible(false);
+					commandFlag = CommandPair.HALT;
+				}
+			}else if(ctrlPress && e.getKeyCode() == KeyEvent.VK_F){
+				// Shortcut for FM
+				if (!(commandFlag == CommandPair.FM)){
+					cancelPreviousCommand(commandFlag);
+					if (commandFlag == -1) {
+						displayCommandInfo();
+					}
+					
+					rankInfoToolbar.setVisible(false);
+					commandFlag = CommandPair.FM;
+				}
+			}else if(ctrlPress && e.getKeyCode() == KeyEvent.VK_B){
+				// Shortcut for BM
+				if (!(commandFlag == CommandPair.BM)) {
+					cancelPreviousCommand(commandFlag);
+					if (commandFlag == -1) {
+						displayCommandInfo();
+					}
+					
+					rankInfoToolbar.setVisible(false);
+					commandFlag = CommandPair.BM;
+				}
+			}else if(ctrlPress && e.getKeyCode() == KeyEvent.VK_R){
+				// Shortcut for RS
+				if (!(commandFlag == CommandPair.RS)){
+					cancelPreviousCommand(commandFlag);
+					if (commandFlag == -1) {
+						displayCommandInfo();
+					}
+					
+					rankInfoToolbar.setVisible(false);
+					commandFlag = CommandPair.RS;
+				}
+			}else if(ctrlPress && e.getKeyCode() == KeyEvent.VK_L){
+				// Shortcut for LS
+				if (!(commandFlag == CommandPair.LS)){
+					cancelPreviousCommand(commandFlag);
+					if (commandFlag == -1) {
+						displayCommandInfo();
+					}
+					
+					rankInfoToolbar.setVisible(false);
+					commandFlag = CommandPair.LS;
 				}
 			}
 		}
