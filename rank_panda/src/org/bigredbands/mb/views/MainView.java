@@ -309,6 +309,10 @@ public class MainView implements ViewInterface {
 		return project.getCtrlPress();
 	}
 	
+	public boolean getShiftPress() {
+		return project.getShiftPress();
+	}
+	
 	/**
 	 * Returns the HashMap of rankNames to rankPositions at the current move
 	 * @return the positions of the ranks for the current move

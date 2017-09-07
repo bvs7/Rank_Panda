@@ -94,6 +94,7 @@ public class ProjectView {
 	private Color highlightedColor = new Color(0,0,255,100);
 	
 	private boolean ctrlPress = false;
+	private boolean shiftPress = false;
 	
 	private final Dimension toolbarSize = new Dimension(1000,38);
 	private JPanel rankInfoToolbar = new JPanel();
@@ -1223,6 +1224,10 @@ public class ProjectView {
 		return ctrlPress;
 	}
 	
+	public boolean getShiftPress(){
+		return shiftPress;
+	}
+	
 	/**
 	 * Creates a scroll bar which displays the list of moves and the field states at each move
 	 * @param numberOfMoves - the number of moves to display in the scroll bar
@@ -1634,6 +1639,9 @@ public class ProjectView {
 			if(e.getKeyCode()==KeyEvent.VK_CONTROL) {
 				ctrlPress = true;
 			}
+			if(e.getKeyCode()==KeyEvent.VK_SHIFT){
+				shiftPress = true;
+			}
 			if (ctrlPress && e.getKeyCode()==KeyEvent.VK_S) {
 				onSave(false);
 			} else if (ctrlPress && e.getKeyCode() == KeyEvent.VK_A) {
@@ -1650,6 +1658,9 @@ public class ProjectView {
 		public void keyReleased(KeyEvent e) {
 			if(e.getKeyCode()==KeyEvent.VK_CONTROL) {
 				ctrlPress = false;
+			}
+			if(e.getKeyCode()==KeyEvent.VK_SHIFT){
+				shiftPress = false;
 			}
 			
 		}

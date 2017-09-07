@@ -879,19 +879,19 @@ public class FootballField extends JPanel {
 								if(((Line2D)(lineMap.get(rankName))).getP1().distance(x, y)<5){
 									System.out.println("head of line "+rankName);
 									mainView.setSelectPoint(HEAD_SELECTED);
-									boolean nCtrlPress = !mainView.getCtrlPress();
+									boolean nCtrlPress = (!mainView.getCtrlPress() && !mainView.getShiftPress());
 									mainView.addSelectedRank(rankName, nCtrlPress);
 									break;
 								} else if(((Line2D)(lineMap.get(rankName))).getP2().distance(x, y)<5){
 									System.out.println("end of line "+rankName);
 									mainView.setSelectPoint(END_SELECTED);
-									boolean nCtrlPress = !mainView.getCtrlPress();
+									boolean nCtrlPress = (!mainView.getCtrlPress() && !mainView.getShiftPress());
 									mainView.addSelectedRank(rankName, nCtrlPress);
 									break;
 									
 								} else {
 									// No specific point is selected - just select the rank
-									boolean nCtrlPress = !mainView.getCtrlPress();
+									boolean nCtrlPress = (!mainView.getCtrlPress() && !mainView.getShiftPress());
 									mainView.addSelectedRank(rankName, nCtrlPress);
 									break;
 								}
@@ -901,24 +901,24 @@ public class FootballField extends JPanel {
 								if(((QuadCurve2D)(lineMap.get(rankName))).getP1().distance(x, y)<5){
 									System.out.println("head of curve "+rankName);
 									mainView.setSelectPoint(HEAD_SELECTED);
-									boolean nCtrlPress = !mainView.getCtrlPress();
+									boolean nCtrlPress = (!mainView.getCtrlPress() && !mainView.getShiftPress());
 									mainView.addSelectedRank(rankName, nCtrlPress);
 									break;
 								} else if(((QuadCurve2D)(lineMap.get(rankName))).getP2().distance(x, y)<5){
 									System.out.println("end of curve "+rankName);
 									mainView.setSelectPoint(END_SELECTED);
-									boolean nCtrlPress = !mainView.getCtrlPress();
+									boolean nCtrlPress = (!mainView.getCtrlPress() && !mainView.getShiftPress());
 									mainView.addSelectedRank(rankName, nCtrlPress);
 									break;
 								} else if (mainView.getRankPositions().get(rankName).getMidpoint().distance((x-topLeftX)/scaleFactor,(y-topLeftY)/scaleFactor)<1){
 									System.out.println("mid of curve "+rankName);
 									mainView.setSelectPoint(MID_SELECTED);
-									boolean nCtrlPress = !mainView.getCtrlPress();
+									boolean nCtrlPress = (!mainView.getCtrlPress() && !mainView.getShiftPress());
 									mainView.addSelectedRank(rankName, nCtrlPress);
 									break;
 								} else {
 									// If no specific point is selected, select the entire rank
-									boolean nCtrlPress = !mainView.getCtrlPress();
+									boolean nCtrlPress = (!mainView.getCtrlPress() && !mainView.getShiftPress());
 									mainView.addSelectedRank(rankName, nCtrlPress);
 									/*QuadCurve2D assistantTestCurve=new QuadCurve2D.Float();
 									double x1=((QuadCurve2D)(lineMap.get(rankName))).getX1();

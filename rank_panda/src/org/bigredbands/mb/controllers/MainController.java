@@ -456,11 +456,11 @@ public class MainController implements ControllerInterface, SynchronizedControll
 			if(reset) selectedRanks.clear();
 				
 			// TODO: decide what's more important: deselection from group, or ability to drag a group
-//			if (selectedRanks.contains(rankName)) {
-//				selectedRanks.remove(rankName);
-//			} else {
+			if (selectedRanks.contains(rankName)) {
+				selectedRanks.remove(rankName);
+			} else {
 			selectedRanks.add(rankName);
-//			}
+			}
 			mainView.updateSelectedRank(selectedRanks, getSharedCommands(selectedRanks,drillInfo.getMoves().get(currentMove).getCommands()));
 			mainView.updateView(currentMove, drillInfo.getMoves().get(currentMove).getCounts());
 		}
