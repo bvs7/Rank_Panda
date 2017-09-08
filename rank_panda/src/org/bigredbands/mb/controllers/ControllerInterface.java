@@ -191,6 +191,11 @@ public interface ControllerInterface {
 	public void mainThreadStopPlayback();
 	
 	/**
+	 * Toggles Playback being paused
+	 */
+	public void togglePausePlayback();
+	
+	/**
 	 * Checks if playback is currently running
 	 * 
 	 * @return - true if playback is running, false if not

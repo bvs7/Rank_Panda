@@ -59,6 +59,8 @@ public class MainController implements ControllerInterface, SynchronizedControll
 	// True if playback is currently running, false if not
 	private boolean playbackRunning = false;
 	
+	private boolean playbackPaused = false;
+	
 	// The current count of the playback animation
 	private int playbackCount = 0;
 	
@@ -552,6 +554,7 @@ public class MainController implements ControllerInterface, SynchronizedControll
 	 */
 	public void mainThreadStopPlayback() {
 		playbackRunning = false;
+		playbackPaused = false;
 		playbackCount = 0;
 		playbackCountTotal = 0;
 		playbackMove = 1;
@@ -571,12 +574,21 @@ public class MainController implements ControllerInterface, SynchronizedControll
 	}
 	
 	/**
+	 * Toggles Playback being paused
+	 */
+	public void togglePausePlayback(){
+		if(playbackRunning){
+			playbackPaused = !playbackPaused;
+		}
+	}
+	
+	/**
 	 * Increments the playback count showing the next step to the user
 	 */
 	@Override
 	public synchronized void incrementPlaybackCount() {
 		//sanity check on the thread existing
-		if (isPlaybackRunning()) {
+		if (isPlaybackRunning() && !playbackPaused) {
 			// TODO: consider making the other methods synchronized as well that way no method 
 			// from the controller may repaint the screen during playback
 			// TODO: resizing the screen may fuck up playback....

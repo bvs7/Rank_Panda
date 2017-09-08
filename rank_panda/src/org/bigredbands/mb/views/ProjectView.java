@@ -101,6 +101,7 @@ public class ProjectView {
 	
 	private ArrayList<JButton> buttonList = new ArrayList<JButton>();
 	private final JButton playbackButton;
+	private JButton playbackPauseButton;
 	
 	//TODO: this is really, really sketchy
 	//doing this so i can pass in an instance of the projectView to the draw ranks function 
@@ -141,6 +142,18 @@ public class ProjectView {
 		JButton FTA = createButton("FTA");
 		JButton curve = createButton("Curve");
 		JButton corner = createButton("Corner");
+		
+		// Tooltips give shortcuts
+		MT.setToolTipText("Mark Time (Ctrl+m)");
+		Hlt.setToolTipText("Halt (Ctrl+h)");
+		FM.setToolTipText("Forward March (Ctrl+f)");
+		BM.setToolTipText("Backward March (Ctrl+b)");
+		RS.setToolTipText("Right Slide (Ctrl+r)");
+		LS.setToolTipText("Left Slide (Ctrl+l)");
+		flatten.setToolTipText("Flatten");
+		
+		//GT.setToolTipText("Gate Turn (Ctrl+G)");
+		//PW.setToolTipText("Pinwheel (Ctrl+P)");
 
 		//add listeners to confirm and cancel button
 		confirmCommand.addActionListener(new ActionListener() {
@@ -915,8 +928,19 @@ public class ProjectView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainView.togglePlayback();
+				playbackPauseButton.setVisible(mainView.isPlaybackRunning());
 			}
 		});
+		
+		playbackPauseButton = new JButton();
+		playbackPauseButton.setText("Play/Pause");
+		playbackPauseButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				controller.togglePausePlayback();
+			}
+		});
+		playbackPauseButton.setVisible(false);
 		
 		// sets up the bar above the command buttons
 		//Add rank button
@@ -972,6 +996,7 @@ public class ProjectView {
 		toolbarButtonsPanel.add(playbackButton);
 		toolbarButtonsPanel.add(addRankButton);
 		toolbarButtonsPanel.add(deleteRankButton);
+		toolbarButtonsPanel.add(playbackPauseButton);
 		toolbarPanel.add(toolbarButtonsPanel, BorderLayout.WEST);
 		
 		JPanel rankAndCountToolbar = new JPanel();

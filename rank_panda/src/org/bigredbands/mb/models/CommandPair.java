@@ -169,13 +169,13 @@ public class CommandPair {
 			case FLAT_TO_ENDS:
 				return "Flat " + counts.toString();
 			case GTCW_HEAD:
-				return "GTCW " + counts.toString();
+				return "GTCW^ " + counts.toString();
 			case GTCW_TAIL:
-				return "GTCW " + counts.toString();
+				return "GTCW. " + counts.toString();
 			case GTCCW_HEAD:
-				return "GTCCW " + counts.toString();
+				return "GTCCW^ " + counts.toString();
 			case GTCCW_TAIL:
-				return "GTCCW " + counts.toString();
+				return "GTCCW. " + counts.toString();
 			case PWCW:
 				return "PWCW " + counts.toString();
 			case PWCCW:
