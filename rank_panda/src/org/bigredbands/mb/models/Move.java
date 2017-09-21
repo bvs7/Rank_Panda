@@ -56,6 +56,21 @@ public class Move {
 		endPositions.remove(rankName);
 	}
 	
+	public void changeRankName(String rankName, String newRankName){
+		while(commands.containsKey(newRankName)){
+			newRankName += "*";
+		}
+		commands.put(newRankName, commands.get(rankName));
+		commands.remove(rankName);
+		
+		startPositions.put(newRankName, startPositions.get(rankName));
+		startPositions.remove(rankName);
+		
+		endPositions.put(newRankName, endPositions.get(rankName));
+		endPositions.remove(rankName);
+		System.out.println("Changed name of " + rankName + " to " + newRankName);
+	}
+	
 	public String addCommand(String rankName, CommandPair command) {
 		//check to make sure the specified rank exists
 		//String rankName = (String)rankNames.toArray()[0];

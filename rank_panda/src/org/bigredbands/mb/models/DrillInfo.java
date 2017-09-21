@@ -74,6 +74,12 @@ public class DrillInfo {
 		}
 	}
 	
+	public void changeRankName(String rankName, String newRankName) {
+		for (Move move : moves){
+			move.changeRankName(rankName, newRankName);
+		}
+	}
+	
 	public boolean doesRankExist(String rankName) {
 		//TODO: assuming each move has the same ranks
 		return moves.get(0).getStartPositions().containsKey(rankName);

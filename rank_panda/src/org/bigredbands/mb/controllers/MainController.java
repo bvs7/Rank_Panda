@@ -342,6 +342,13 @@ public class MainController implements ControllerInterface, SynchronizedControll
 		
 	}
 	
+	public void changeRankName(String newRankName) {
+		for (String rankName : selectedRanks){
+			drillInfo.changeRankName(rankName, newRankName);
+		}
+		mainView.updateView(currentMove, drillInfo.getMoves().get(currentMove).getCounts());
+	}
+	
 	public String checkMoveCounts(){
 		return drillInfo.getMoves().get(currentMove).checkMoveCounts();
 	}
@@ -541,7 +548,11 @@ public class MainController implements ControllerInterface, SynchronizedControll
 			playbackRunning = true;
 			mainView.disableProjectButtons();
 			playbackCount = 0;
-			playbackMove = currentMove;
+			playbackCountTotal = 0;
+			for(int moveToAdd = 1; moveToAdd <= currentMove; moveToAdd++){
+				playbackCountTotal += drillInfo.getMoves().get(moveToAdd).getCounts();
+			}
+			playbackMove = currentMove; // Start at current move
 			playbackThread = new Thread(new PlaybackController(this));
 		    playbackThread.start();
 		    System.out.println("Playback Started.");

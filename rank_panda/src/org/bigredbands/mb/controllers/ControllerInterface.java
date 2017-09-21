@@ -296,5 +296,7 @@ public interface ControllerInterface {
 
 	public String checkMoveCounts();
 	
+	public void changeRankName(String newRankName);
+	
 	void deleteMove(int moveNum);
 }

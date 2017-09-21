@@ -332,6 +332,7 @@ public class ProjectView {
 
 		// Creates the buttons for the edit menu
 		JMenuItem addRankMenuItem = new JMenuItem("Add Rank");
+		JMenuItem changeRankNameMenuItem = new JMenuItem("Change Rank Name (Buggy)");
 		JMenuItem songConstantsMenuItem = new JMenuItem("Edit Song Constants");
 		JMenuItem editMoveComments = new JMenuItem("Edit Move Comments");
 		JMenuItem checkMoveCounts = new JMenuItem("Check Move Counts");
@@ -348,6 +349,7 @@ public class ProjectView {
 
 		// Sets the tooltips for the edit menu
 		addRankMenuItem.setToolTipText("Add a new rank to this project");
+		changeRankNameMenuItem.setToolTipText("Modify the name of a Rank");
 		songConstantsMenuItem.setToolTipText("Modify measures' tempos and counts");
 		editMoveComments.setToolTipText("Edit the comments section in the PDF for this move.");
 		checkMoveCounts.setToolTipText("Check if any rank's drill does not add up to move counts.");
@@ -361,6 +363,7 @@ public class ProjectView {
 		exportPDFMenuItem.addActionListener(new ExportPDF());
 		exitMenuItem.addActionListener(new Exit());
 		addRankMenuItem.addActionListener(new AddRank());
+		changeRankNameMenuItem.addActionListener(new ChangeRankName());
 		songConstantsMenuItem.addActionListener(new SongConstants());
 		editMoveComments.addActionListener(new EditMoveComments());
 		checkMoveCounts.addActionListener(new CheckMoveCounts());
@@ -374,6 +377,7 @@ public class ProjectView {
 		fileMenu.add(exportPDFMenuItem);
 		fileMenu.add(exitMenuItem);
 		editMenu.add(addRankMenuItem);
+		editMenu.add(changeRankNameMenuItem);
 		editMenu.add(songConstantsMenuItem);
 		editMenu.add(editMoveComments);
 		editMenu.add(checkMoveCounts);
@@ -1556,6 +1560,62 @@ public class ProjectView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			fieldPanel.drawNewRank(thisProjectView);
+		}
+	}
+	
+	/**
+	 * Changes the string name of a Rank
+	 */
+	class ChangeRankName implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (controller.getSelectedRanks().size() != 1){
+				mainView.displayError("Please select one and only one rank to change names.");	
+			}else{
+				final JDialog changeRankNameDialog = new JDialog(window, "Change Rank Name");
+				changeRankNameDialog.setAlwaysOnTop(true);
+				changeRankNameDialog.setLocationRelativeTo(window);
+				changeRankNameDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+				
+				JPanel rankNameEntryPanel = new JPanel();
+				rankNameEntryPanel.setLayout(new BoxLayout(rankNameEntryPanel, BoxLayout.Y_AXIS));
+				
+				JLabel rankNameEntryLabel = new JLabel();
+				rankNameEntryLabel.setText("Change Selected Rank Name to");
+				rankNameEntryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+				
+				final JTextField newRankNameField = new JTextField();
+				newRankNameField.setAlignmentX(Component.CENTER_ALIGNMENT);
+				
+				JPanel buttonPanel = new JPanel();
+				buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+				
+				JButton confirmationButton = new JButton("OK");
+				confirmationButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						controller.changeRankName(newRankNameField.getText());
+						changeRankNameDialog.dispose();
+					}
+				});
+				
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						changeRankNameDialog.dispose();
+					}
+				});
+				
+				buttonPanel.add(confirmationButton);
+				buttonPanel.add(cancelButton);
+				
+				rankNameEntryPanel.add(rankNameEntryLabel);
+				rankNameEntryPanel.add(newRankNameField);
+				rankNameEntryPanel.add(buttonPanel);
+				
+				changeRankNameDialog.add(rankNameEntryPanel);
+				changeRankNameDialog.pack();
+				changeRankNameDialog.setVisible(true);
+			}
 		}
 	}
 	
