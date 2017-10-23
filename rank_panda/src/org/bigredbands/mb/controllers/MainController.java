@@ -549,7 +549,7 @@ public class MainController implements ControllerInterface, SynchronizedControll
 			mainView.disableProjectButtons();
 			playbackCount = 0;
 			playbackCountTotal = 0;
-			for(int moveToAdd = 1; moveToAdd <= currentMove; moveToAdd++){
+			for(int moveToAdd = 1; moveToAdd < currentMove; moveToAdd++){
 				playbackCountTotal += drillInfo.getMoves().get(moveToAdd).getCounts();
 			}
 			playbackMove = currentMove; // Start at current move
